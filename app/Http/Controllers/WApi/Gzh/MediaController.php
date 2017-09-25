@@ -9,8 +9,8 @@ class MediaController extends WApiController
 {
     public function __construct()
     {
-        parent::__construct();
         $this->model = new WxLogic();
+        parent::__construct();
     }
     
     public function index()

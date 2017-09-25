@@ -36,7 +36,6 @@ class MessageLogic
 	        $kfList = $kfList['kf_list'];
 	        $key = mt_rand(0, count($kfList)-1);
 	        $kfInfo = $kfList[$key];
-	        
 	    }
 	    
 	    $msgType = $object['MsgType'];

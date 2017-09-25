@@ -14,8 +14,8 @@ class WxLogic extends BaseLogic
 	//构造函数，获取Access Token
 	public function __construct($appid = NULL, $appsecret = NULL)
 	{
-		$this->appid = $appid ? $appid : 'wxa6e3ec03c10f947e' ;
-		$this->appsecret = $appsecret ? $appsecret : 'a833683db8c716b9e308e0fd72142887';
+	    $this->appid = $appid ? $appid : get_config(APPSECRET)['value'];
+	    $this->appsecret = $appsecret ? $appsecret : get_config(APPSECRET)['value'];
 		
 		$this->token_name = 'fw_access_token_'.$this->appid;
 		$this->token_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={appid}&secret={appsecret}';

@@ -22,7 +22,7 @@ class WxController extends Controller
         $wechatObj = new WechatCallback($config);
         if (!isset($_GET['echostr'])) {
             $wechatObj->responseMsg();
-        }else{
+        } else {
             $token = 'nz_gzh_token';
             $wechatObj->valid($token);
         }

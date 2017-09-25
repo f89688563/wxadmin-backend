@@ -22,9 +22,12 @@ Route::group(['prefix'=>'wx'], function(){
 });
 
 Route::group(['prefix'=>'wapi'], function(){
-    Route::resource('gzh/config', 'WApi\Gzh\ConfigController');
-    Route::resource('gzh/button', 'WApi\Gzh\ButtonController');
-    Route::resource('gzh/media', 'WApi\Gzh\MediaController');
-    Route::resource('gzh/user', 'WApi\Gzh\UserController');
-    Route::resource('gzh', 'WApi\GzhController');
+    Route::group(['prefix'=> 'gzh'], function(){
+        Route::resource('config', 'WApi\Gzh\ConfigController');
+        Route::resource('button', 'WApi\Gzh\ButtonController');
+        Route::resource('media', 'WApi\Gzh\MediaController');
+        Route::resource('user', 'WApi\Gzh\UserController');
+        Route::get('user/wxinfo/{openid}', 'WApi\Gzh\UserController@wxinfo');
+    });
+//     Route::resource('gzh', 'WApi\GzhController');
 });

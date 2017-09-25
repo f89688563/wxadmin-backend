@@ -10,8 +10,8 @@ class ButtonController extends WApiController
     var $logic;
     public function __construct()
     {
-        parent::__construct();
         $this->logic = new WxLogic();
+        parent::__construct();
     }
     
     public function index()

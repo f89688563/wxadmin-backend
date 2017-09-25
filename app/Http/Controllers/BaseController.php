@@ -29,10 +29,9 @@ class BaseController extends Controller
         if (!$this->model)
         {
             $class_name= "\App\\$name";
-            if (class_exists($class_name))
-            {
+            if(class_exists($class_name = $class_name.'Model')) {
                 $this->model = new $class_name();
-            } elseif(class_exists($class_name = $class_name.'Model')) {
+            } elseif(class_exists($class_name)) {
                 $this->model = new $class_name();
             }
         }

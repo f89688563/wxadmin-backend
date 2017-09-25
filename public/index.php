@@ -38,6 +38,8 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 // 配置名
 define('KF_KEYWORDS', 'KF_KEYWORDS');
 define('SUBSCRIBE_MSG', 'SUBSCRIBE_MSG');
+define('APPID', 'APPID');
+define('APPSECRET', 'APPSECRET');
 
 /*
 |--------------------------------------------------------------------------

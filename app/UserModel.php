@@ -1,11 +1,19 @@
 <?php
-
 namespace App;
+
+use App\Http\Logic\WxLogic;
 
 class UserModel extends BaseModel
 {
     // 屏蔽字段批量赋值
     protected $guarded = ['id', 'deleted_at'];
+    
+    public function wxinfo($openid)
+    {
+        $wxLogic = new WxLogic();
+        $info = $wxLogic->get_user_info($openid);
+        return $info;
+    }
     
     public function subscribe($openid, $subscribe=1)
     {
