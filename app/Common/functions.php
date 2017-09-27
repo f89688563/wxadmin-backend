@@ -13,7 +13,7 @@ if (!function_exists('get_config'))
         if (!$config){
             $model = new ConfigModel();
             $config = $model->getConfig();
-            cache([$cache_name => $config], 7200);
+            cache([$cache_name => $config], 120);
         }
         
         $config = $name ? $config[$name] : $config;

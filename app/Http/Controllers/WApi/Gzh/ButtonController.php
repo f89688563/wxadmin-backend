@@ -37,10 +37,31 @@ class ButtonController extends WApiController
         $this->response($data);
     }
     
-    public function update($id)
+    public function store()
+    {        
+        $buttons = json_decode(request('buttons'), true);
+        $tagId = request('tagId');
+        $data = ['button'=>$buttons];
+        if ($tagId) {
+            $data['matchrule'] = ['tag_id'=>$tagId];
+            $res = $this->logic->createConditionalMenu($data);
+        } else {            
+            $res = $this->logic->create_menu($data);
+        }
+        $this->response($res);
+    }
+    
+    public function update($id=0)
     {
         $buttons = json_decode(request('buttons'), true);
         $data = ['button'=>$buttons];
+        $tagId = request('tagId');
+        if ($tagId) {
+            $data['matchrule'] = ['tag_id'=>$tagId];
+            $res = $this->logic->createConditionalMenu($data);
+        } else {            
+            $res = $this->logic->create_menu($data);
+        }
         $res = $this->logic->create_menu($data);
         $this->response($res);
     }

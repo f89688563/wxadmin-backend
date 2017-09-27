@@ -9,6 +9,7 @@ class BaseController extends Controller
 {
     
     var $table;
+    var $logic;
     var $model;
     
     public function __construct()

@@ -28,6 +28,8 @@ Route::group(['prefix'=>'wapi'], function(){
         Route::resource('media', 'WApi\Gzh\MediaController');
         Route::resource('user', 'WApi\Gzh\UserController');
         Route::get('user/wxinfo/{openid}', 'WApi\Gzh\UserController@wxinfo');
+        Route::post('user/setTag', 'WApi\Gzh\UserController@setTag');
+        Route::resource('tags', 'WApi\Gzh\TagsController');
     });
 //     Route::resource('gzh', 'WApi\GzhController');
 });

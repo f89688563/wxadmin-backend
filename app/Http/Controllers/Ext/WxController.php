@@ -11,12 +11,6 @@ class WxController extends Controller
 {
     public function index()
     {
-        
-//         $logic = new WxLogic();
-        $logic = new MessageLogic();
-        $lists = $logic->msg_2_kf(1, 2);
-        dd($lists);
-        
         header('Content-type:text');
         $config = '';
         $wechatObj = new WechatCallback($config);

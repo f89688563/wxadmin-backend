@@ -21,6 +21,14 @@ class UserController extends WApiController
         $this->response($info);
     }
     
+    public function setTag()
+    {
+        $tagId = request('tagId');
+        $openId = request('openId');
+        $res = $this->logic->setTag($openId, $tagId);
+        $this->response($res);
+    }
+    
 //     public function index()
 //     {
 //         echo '<pre>';

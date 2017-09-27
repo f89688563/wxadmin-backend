@@ -25,6 +25,7 @@ class ConfigController extends WApiController
         $res = $this->model->where('id', $id)->update($data);
         if ($res)
         {
+            cache(['wx_config'=>null], 1);
             $this->response();
         } else {
             $this->response(['errcode'=>-1, 'errmsg'=>'操作异常']);

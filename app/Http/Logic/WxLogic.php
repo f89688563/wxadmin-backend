@@ -104,6 +104,51 @@ class WxLogic extends BaseLogic
 		return json_decode($res, true);
 	}
 	
+	// 创建标签
+	public function createTags($name)
+	{
+	    $url = "https://api.weixin.qq.com/cgi-bin/tags/create?access_token=".$this->access_token;
+	    $data = [
+	        "tag" => [	            
+	           'name'=> $name
+	        ]
+	    ];
+	    $res = $this->https_request($url, json_encode($data, JSON_UNESCAPED_UNICODE));
+	    return json_decode($res, true);
+	}
+	// 删除标签
+	public function deleteTags($id)
+	{
+	    $url = "https://api.weixin.qq.com/cgi-bin/tags/delete?access_token=".$this->access_token;
+	    $data = [
+	        "tag" => [	            
+	           'id'=> $id
+	        ]
+	    ];
+	    $res = $this->https_request($url, json_encode($data, JSON_UNESCAPED_UNICODE));
+	    return json_decode($res, true);
+	}
+	// 修改标签
+	public function updateTags($id, $name)
+	{
+	    $url = "https://api.weixin.qq.com/cgi-bin/tags/update?access_token=".$this->access_token;
+	    $data = [
+	        "tag" => [
+	            'id' => $id,
+	            'name'=> $name
+	        ]
+	    ];
+	    $res = $this->https_request($url, json_encode($data, JSON_UNESCAPED_UNICODE));
+	    return json_decode($res, true);
+	}
+	// 获取标签
+	public function getTags()
+	{
+	    $url = "https://api.weixin.qq.com/cgi-bin/tags/get?access_token=".$this->access_token;
+	    $res = $this->https_request($url);
+	    return json_decode($res, true);
+	}
+	
 	//获取素材
 	public function getMedia($type='image', $page=1, $perPage=10)
 	{
@@ -128,39 +173,8 @@ class WxLogic extends BaseLogic
 	}
 	
 	//创建菜单
-	public function create_menu( $data=[] )
+	public function create_menu($data)
 	{
-		if (! $data) {
-			$data = array(
-				"button"=>array(
-					array(
-						"type"=>"view",
-						"name"=>"屛碎险",
-						"url"=>"http://sp.kuncloud.cn/htdocs/?action=auth/login"
-					),
-					array(
-						"type"=>"view",
-						"name"=>"帮助",
-						"url"=>"http://baidu.com"
-					),
-					array(
-						"name"=>"多菜单",
-						"sub_button"=>array(
-							array(
-			                    "type"=>"scancode_waitmsg", 
-			                    "name"=>"扫码带提示", 
-			                    "key"=>"rselfmenu_0_0", 
-			                ), 
-			                array(
-			                    "type"=>"scancode_push", 
-			                    "name"=>"扫码推事件", 
-			                    "key"=>"rselfmenu_0_1", 
-			                )
-		            	)
-					),
-				),
-			);
-		}
 		// 参数2不转中文
 		$data = json_encode($data, JSON_UNESCAPED_UNICODE);
 		
@@ -169,10 +183,36 @@ class WxLogic extends BaseLogic
 		return json_decode( $res, true );
 	}
 	
+	//创建个性化菜单
+	public function createConditionalMenu($data)
+	{
+		// 参数2不转中文
+		$data = json_encode($data, JSON_UNESCAPED_UNICODE);
+		
+		$url = "https://api.weixin.qq.com/cgi-bin/menu/addconditional?access_token=".$this->access_token;
+		$res = $this->https_request( $url, $data );
+		return json_decode( $res, true );
+	}
+	
 	public function getMenu()
 	{
 		$url = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=".$this->access_token;
 		$res = $this->https_request( $url );
+		return json_decode( $res, true );
+	}
+	
+	// 批量打标签
+	public function setTag($openId, $tagId)
+	{
+		$url = "https://api.weixin.qq.com/cgi-bin/tags/members/batchtagging?access_token=".$this->access_token;
+		if (is_string($openId)) {
+		    $openId = [$openId];
+		}
+		$data = [
+		    'openid_list' => $openId,
+		    'tagid' => $tagId
+		];
+		$res = $this->https_request($url, json_encode($data, JSON_UNESCAPED_UNICODE));
 		return json_decode( $res, true );
 	}
 	
